@@ -14,13 +14,11 @@ const db = getFirestore(app);
 
 export default function TaskForm() {
     const [tasks, setTasks] = useState<Task[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const q = query(collection(db, 'tasks'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            setIsLoading(true);
             setError(null);
             try {
                 const tasksArray = querySnapshot.docs.map(doc => ({
@@ -41,21 +39,14 @@ export default function TaskForm() {
             } catch (e) {
                 setError(e instanceof Error ? e.message : 'An unknown error occurred');
                 console.error("Error fetching tasks:", e);
-            } finally {
-                setIsLoading(false);
             }
         }, (error) => {
             console.error("Firestore error:", error);
             setError("Failed to fetch tasks. Please try again later.");
-            setIsLoading(false);
         });
 
         return () => unsubscribe();
     }, []);
-
-    if (isLoading) {
-        return <div>Loading tasks...</div>;
-    }
 
     if (error) {
         return <div>Error: {error}</div>;
