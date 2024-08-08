@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "@/firebase";
+import { db } from "@/firebaseConfig";
 
 import { Button } from "@/components/ui/button";
 import {

@@ -2,16 +2,12 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, onSnapshot, query } from 'firebase/firestore';
-import { firebaseConfig } from "@/firebase";
+import { firebaseConfig, db } from "@/firebaseConfig";
 import { DataTable } from "@/components/data-table/DataTable";
 import { columns } from "@/components/data-table/Columns";
 import { taskSchema } from "@/data/schema";
 import { Task } from "@/data/schema";
 import { TasksContext } from "@/context/tasksContext";
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 export default function TaskTable() {
     const [tasks, setTasks] = useState<Task[]>([]);

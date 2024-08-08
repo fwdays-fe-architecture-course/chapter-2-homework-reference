@@ -27,7 +27,7 @@ export default defineConfig({
             exposes: {
                 "./TasksList": "./src/App.tsx",
             },
-            shared: generateSharedConfig(dependencies),
+            shared: ["react", "react-dom"],
         }),
     ],
     build: {

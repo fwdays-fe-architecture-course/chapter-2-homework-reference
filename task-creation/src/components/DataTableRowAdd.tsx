@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {collection, addDoc} from "firebase/firestore";
-import {db} from "@/firebase"; // Adjust the import path as needed
+import {db} from "@/firebaseConfig"; // Adjust the import path as needed
 
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
