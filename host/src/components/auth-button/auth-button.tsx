@@ -9,7 +9,7 @@ export const AuthButton = () => {
 
     if (!user) {
         return (
-            <Link to="/login" className="py-2 px-3 flex rounded-md no-underline bg-secondary">
+            <Link to="/login" variant="outline">
                 Log in
             </Link>
         );
@@ -21,7 +21,7 @@ export const AuthButton = () => {
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>{user?.email}!</AvatarFallback>
             </Avatar>
-            <Button onClick={handleSignOut} className="py-2 px-4 rounded-md no-underline bg-secondary">
+            <Button onClick={handleSignOut}  variant="outline">
                 Log out
             </Button>
         </div>
