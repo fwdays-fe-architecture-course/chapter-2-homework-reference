@@ -4,22 +4,22 @@ import federation from "@originjs/vite-plugin-federation";
 import {defineConfig} from "vite";
 import {dependencies} from './package.json';
 
-const generateSharedConfig = (dependencies) => {
-    const sharedConfig = {};
+const excludedDeps = ["react-router-dom"];
+
+const generateSharedConfig = (dependencies: Record<string, string>) => {
+    const sharedConfig: Record<string, { requiredVersion: string; singleton: boolean; import: boolean }> = {};
 
     Object.keys(dependencies).forEach((dependencyName) => {
-        if (['@radix-ui/react-slot', 'clsx', 'tailwind-merge', 'class-variance-authority'].includes(dependencyName)) return;
+        if (excludedDeps.includes(dependencyName)) return;
         sharedConfig[dependencyName] = {
             requiredVersion: dependencies[dependencyName],
-            import: dependencyName === 'react' || dependencyName === 'react-dom' ? true : false,
+            singleton: true,
+            import: true,
         };
     });
 
     return sharedConfig;
 };
-
-console.log('SharedConfig: ', generateSharedConfig(dependencies));
-
 
 export default defineConfig({
     plugins: [
@@ -30,7 +30,7 @@ export default defineConfig({
             exposes: {
                 "./Auth": "./src/App.tsx",
             },
-            shared: ['react', 'react-dom'],
+            shared: generateSharedConfig(dependencies),
         }),
     ],
     build: {

@@ -4,14 +4,16 @@ import federation from "@originjs/vite-plugin-federation";
 import {defineConfig} from "vite";
 import {dependencies} from './package.json';
 
+const excludedDeps = ['firebase', '@radix-ui/react-dialog'];
+
 const generateSharedConfig = (dependencies: Record<string, string>) => {
     const sharedConfig: Record<string, { requiredVersion: string; import: boolean }> = {};
 
     Object.keys(dependencies).forEach((dependencyName) => {
-        if (['@radix-ui/react-slot'].includes(dependencyName)) return;
+        if (excludedDeps.includes(dependencyName)) return;
         sharedConfig[dependencyName] = {
             requiredVersion: dependencies[dependencyName],
-            import: false,
+            import: true,
         };
     });
 
@@ -27,7 +29,7 @@ export default defineConfig({
             exposes: {
                 "./TaskList": "./src/App.tsx",
             },
-            shared: ["react", "react-dom"],
+            shared: generateSharedConfig(dependencies),
         }),
     ],
     build: {
@@ -42,3 +44,4 @@ export default defineConfig({
         },
     },
 })
+

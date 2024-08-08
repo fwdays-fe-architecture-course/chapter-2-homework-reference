@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, onSnapshot, query } from 'firebase/firestore';
-import { firebaseConfig, db } from "@/firebaseConfig";
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import { db } from "@/firebaseConfig";
 import { taskSchema } from "@/data/schema";
 import { Task } from "@/data/schema";
 import {DataTableRowAdd} from "@/components/DataTableRowAdd";

@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {collection, addDoc} from "firebase/firestore";
-import {db} from "@/firebaseConfig"; // Adjust the import path as needed
+import {db} from "@/firebaseConfig";
 
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
@@ -23,18 +23,16 @@ export function DataTableRowAdd() {
                 status: "todo",
                 priority: "medium",
             });
-            console.log("Document written with ID: ", docRef.id);
             setNewTask("");
             setNewTaskName("");
             setError("");
-            // You might want to refresh the tasks list here or use a Firebase listener
         } catch (error) {
             console.error("Error adding document: ", error);
         }
     };
 
     return (
-        <div className="h-full flex-1 flex-col space-y-2 p-2 md:flex">
+        <div className="h-full flex flex-col space-y-2 p-2 md:flex w-1/2 justify-center items-center mr-auto ml-auto">
             <Input
                 placeholder="Name"
                 value={newTaskName}

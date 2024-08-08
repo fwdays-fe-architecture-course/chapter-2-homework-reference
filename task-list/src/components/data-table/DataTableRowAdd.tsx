@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {collection, addDoc} from "firebase/firestore";
-import {db} from "@/firebaseConfig"; // Adjust the import path as needed
+import {db} from "@/firebaseConfig";
 
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
@@ -27,7 +27,6 @@ export function DataTableRowAdd() {
             setNewTask("");
             setNewTaskName("");
             setError("");
-            // You might want to refresh the tasks list here or use a Firebase listener
         } catch (error) {
             console.error("Error adding document: ", error);
         }
