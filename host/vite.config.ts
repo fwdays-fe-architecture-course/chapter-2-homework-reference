@@ -5,14 +5,14 @@ import path from "path";
 import federation from "@originjs/vite-plugin-federation";
 import {dependencies} from './package.json';
 
-const generateSharedConfig = (dependencies: Record<string, string>) => {
-    const sharedConfig: Record<string, { requiredVersion: string; import: boolean }> = {};
+const generateSharedConfig = (dependencies) => {
+    const sharedConfig = {};
 
     Object.keys(dependencies).forEach((dependencyName) => {
-        if (['@radix-ui/react-slot', 'class-variance-authority'].includes(dependencyName)) return;
+        if (['@radix-ui/react-slot'].includes(dependencyName)) return;
         sharedConfig[dependencyName] = {
             requiredVersion: dependencies[dependencyName],
-            import: false,
+            import: dependencyName === 'react' || dependencyName === 'react-dom' ? true : false,
         };
     });
 
@@ -25,9 +25,9 @@ export default defineConfig({
         federation({
             name: "host",
             remotes: {
-                taskAuth: `http://localhost:3001/assets/remoteEntry.js`,
-                taskEditor: `http://localhost:3002/assets/remoteEntry.js`,
-                taskList: `http://localhost:3003/assets/remoteEntry.js`,
+                auth: `http://localhost:3001/assets/authRemoteEntry.js`,
+                taskCreation: `http://localhost:3002/assets/taskCreationRemoteEntry.js`,
+                taskList: `http://localhost:3003/assets/taskListRemoteEntry.js`,
             },
             shared: ['react', 'react-dom'],
         }),

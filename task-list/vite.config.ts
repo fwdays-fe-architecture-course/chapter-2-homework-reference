@@ -25,7 +25,7 @@ export default defineConfig({
             name: "taskList",
             filename: "taskListRemoteEntry.js",
             exposes: {
-                "./TasksList": "./src/App.tsx",
+                "./TaskList": "./src/App.tsx",
             },
             shared: ["react", "react-dom"],
         }),
