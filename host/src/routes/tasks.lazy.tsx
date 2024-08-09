@@ -10,14 +10,8 @@ export const Route = createLazyFileRoute("/tasks")({
 });
 
 export default function TasksPage() {
-  // const { session } = useAuth();
   const router = useRouter();
 
-  // if (session === null) {
-  //   return "Loading ...";
-  // }
-
-  console.log('router.navigate', router.navigate);
   return (
     <>
       <Header />

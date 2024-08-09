@@ -15,7 +15,7 @@ function Editor() {
   const { session } = useAuth();
   const router = useRouter();
 
-  if (session === null) {
+  if (session === undefined) {
     return "Loading ...";
   }
 
