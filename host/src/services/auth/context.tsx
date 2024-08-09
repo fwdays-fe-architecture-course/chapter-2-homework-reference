@@ -13,7 +13,7 @@ const AuthContext = createContext<AuthContextDefaultValue>({
 interface AuthProviderProps extends PropsWithChildren {}
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [session, setSession] = useState<Session | null>();
+    const [session, setSession] = useState<Session | null>(null);
 
     useEffect(() => {
         db.auth.getSession().then(({ data }) => {

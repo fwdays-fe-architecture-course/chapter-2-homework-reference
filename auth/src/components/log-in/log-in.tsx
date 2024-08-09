@@ -1,6 +1,4 @@
 import UserAuth from '@/components/user-auth/user-auth';
-import { UserAuthPersonQuote } from '@/components/user-auth/user-auth-person-quote';
-import { UserAuthLink } from '@/components/user-auth/user-auth-link';
 import { useHandleSubmit } from './log-in-controller';
 
 interface LogInProps {

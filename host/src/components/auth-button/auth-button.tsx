@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "@tanstack/react-router";
 import { useHandleSignOut, useHandleUser } from './auth-button-controller';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -9,7 +9,7 @@ export const AuthButton = () => {
 
     if (!user) {
         return (
-            <Link to="/login" variant="outline">
+            <Link to="/login">
                 Log in
             </Link>
         );

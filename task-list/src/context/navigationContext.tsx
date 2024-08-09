@@ -1,29 +1,36 @@
-import { PropsWithChildren, createContext, useContext } from 'react';
+import { PropsWithChildren, createContext, useContext } from "react";
 
 interface NavigateParams<T> {
-    to: T;
-    isHost?: boolean;
+  to: T;
+  isHost?: boolean;
 }
 
 interface NavigationContextDefaultValue {
-    navigate(params: NavigateParams<unknown>): void;
+  navigate(params: NavigateParams<unknown>): void;
 }
 
-const NavigationContext = createContext<NavigationContextDefaultValue>({
-    navigate: () => undefined,
+export const NavigationContext = createContext<NavigationContextDefaultValue>({
+  navigate: () => undefined,
 });
 
 interface NavigationProviderProps extends PropsWithChildren {
-    onNavigate?(path: string): void;
+  onNavigate?(path: string): void;
 }
 
-export const NavigationProvider = ({ onNavigate, children }: NavigationProviderProps) => {
-    const handleNavigate = <T extends string | Record<string, never>>({ to, isHost = false }: NavigateParams<T>) =>
-        isHost ? onNavigate?.(to as string) : undefined;
+export const NavigationProvider = ({
+  onNavigate,
+  children,
+}: NavigationProviderProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleNavigate = onNavigate as any;
 
-    const navigationValue = { navigate: handleNavigate };
+  const navigationValue = { navigate: handleNavigate };
 
-    return <NavigationContext.Provider value={navigationValue}>{children}</NavigationContext.Provider>;
+  return (
+    <NavigationContext.Provider value={navigationValue}>
+      {children}
+    </NavigationContext.Provider>
+  );
 };
 
 export const useNavigation = () => useContext(NavigationContext);

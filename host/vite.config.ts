@@ -4,6 +4,7 @@ import path from "path";
 
 import federation from "@originjs/vite-plugin-federation";
 import {dependencies} from './package.json';
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 
 const excludedDeps = [
     '@radix-ui/react-avatar',
@@ -30,6 +31,7 @@ const generateSharedConfig = (dependencies: Record<string, string>) => {
 
 export default defineConfig({
     plugins: [
+        TanStackRouterVite(),
         react(),
         federation({
             name: "host",
