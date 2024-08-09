@@ -29,8 +29,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const authValue = { session };
 
-    console.log('authValue', authValue);
-
     return <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>;
 };
 
