@@ -66,7 +66,9 @@ export default function TaskTable() {
   }
 
   const handleCreateNewTask = () => {
-    onNavigateContext?.navigate({ to: "/editor" });
+    if (onNavigateContext?.navigate) {
+      onNavigateContext?.navigate({ to: "/editor" });
+    }
   };
 
   return (
