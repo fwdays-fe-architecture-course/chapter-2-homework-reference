@@ -7,13 +7,12 @@ import {dependencies} from './package.json';
 const excludedDeps = ["react-router-dom"];
 
 const generateSharedConfig = (dependencies: Record<string, string>) => {
-    const sharedConfig: Record<string, { requiredVersion: string; singleton: boolean; import: boolean }> = {};
+    const sharedConfig: Record<string, { requiredVersion: string; import: boolean }> = {};
 
     Object.keys(dependencies).forEach((dependencyName) => {
         if (excludedDeps.includes(dependencyName)) return;
         sharedConfig[dependencyName] = {
             requiredVersion: dependencies[dependencyName],
-            singleton: true,
             import: true,
         };
     });
