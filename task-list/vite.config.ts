@@ -1,20 +1,26 @@
 import path from "path";
 import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
-import {defineConfig} from "vite";
-import {dependencies} from './package.json';
+import { defineConfig } from "vite";
+import { dependencies } from './package.json';
 
-const excludedDeps = ['firebase', '@radix-ui/react-dialog'];
+const sharedDependencies = {
+    react: dependencies.react,
+    'react-dom': dependencies['react-dom'],
+    'lucide-react': dependencies['lucide-react'],
+};
 
 const generateSharedConfig = (dependencies: Record<string, string>) => {
-    const sharedConfig: Record<string, { requiredVersion: string; import: boolean }> = {};
+    const excludedDeps = ['firebase', '@tanstack/react-table', 'react-router-dom', '@radix-ui/react-dialog'];
+    const sharedConfig = { ...sharedDependencies };
 
     Object.keys(dependencies).forEach((dependencyName) => {
-        if (excludedDeps.includes(dependencyName)) return;
-        sharedConfig[dependencyName] = {
-            requiredVersion: dependencies[dependencyName],
-            import: true,
-        };
+        if (!sharedConfig[dependencyName] && !excludedDeps.includes(dependencyName)) {
+            sharedConfig[dependencyName] = {
+                requiredVersion: dependencies[dependencyName],
+                import: true,
+            };
+        }
     });
 
     return sharedConfig;
@@ -43,5 +49,4 @@ export default defineConfig({
             "@": path.resolve(__dirname, "./src"),
         },
     },
-})
-
+});
