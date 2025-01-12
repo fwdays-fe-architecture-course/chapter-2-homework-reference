@@ -77,6 +77,8 @@ export class TaskTableComponent {
       todo: 'Something to do',
       status: 'Pending',
       priority: '4'
+    }).catch(e => {
+      console.error('Error adding task from table:', e);
     });
   }
 

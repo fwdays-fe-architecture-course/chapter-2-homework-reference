@@ -1,4 +1,3 @@
-// edit-task-form.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Task } from '../../models/task.model';
@@ -58,12 +57,6 @@ export class EditTaskFormComponent {
       name: ['', Validators.required],
       todo: ['', Validators.required]
     });
-  }
-
-  ngOnInit() {
-    if (this.task) {
-      this.taskForm.patchValue(this.task);
-    }
   }
 
   onSubmit() {

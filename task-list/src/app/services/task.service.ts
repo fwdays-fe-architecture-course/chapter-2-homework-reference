@@ -18,6 +18,7 @@ export class TaskService {
   private initializeTaskListener() {
     const db = this.firebaseService.firestore;
     const q = collection(db, 'tasks');
+
     onSnapshot(q, (querySnapshot) => {
       const tasks = querySnapshot.docs.map(doc => ({
         id: doc.id,
